@@ -2,6 +2,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+REPO="https://raw.githubusercontent.com/MohammadFalhaa/server-config/main"
 
 usage() {
     echo "Usage: $0 [options]"
@@ -22,16 +23,28 @@ usage() {
     echo "  ./setup.sh --tools --neovim       # tools and neovim only"
 }
 
-run_tools()    { bash "$SCRIPT_DIR/install/tools.sh"; }
-run_server()   { bash "$SCRIPT_DIR/install/server.sh"; }
-run_docker()   { bash "$SCRIPT_DIR/install/docker.sh"; }
-run_postgres() { bash "$SCRIPT_DIR/install/postgres.sh"; }
-run_tmux()     { bash "$SCRIPT_DIR/install/tmux.sh"; }
-run_neovim()   { bash "$SCRIPT_DIR/install/neovim.sh"; }
+_run() {
+    if [[ "$SCRIPT_DIR" == /dev/fd* ]]; then
+        bash <(curl -fsSL "$REPO/$1")
+    else
+        bash "$SCRIPT_DIR/$1"
+    fi
+}
+
+run_tools()    { _run install/tools.sh; }
+run_server()   { _run install/server.sh; }
+run_docker()   { _run install/docker.sh; }
+run_postgres() { _run install/postgres.sh; }
+run_tmux()     { _run install/tmux.sh; }
+run_neovim()   { _run install/neovim.sh; }
 
 run_dotfiles() {
     echo "→ Applying .bashrc..."
-    cat "$SCRIPT_DIR/configs/.bashrc" >> "$HOME/.bashrc"
+    if [[ "$SCRIPT_DIR" == /dev/fd* ]]; then
+        curl -fsSL "$REPO/configs/.bashrc" >> "$HOME/.bashrc"
+    else
+        cat "$SCRIPT_DIR/configs/.bashrc" >> "$HOME/.bashrc"
+    fi
     echo "✓ .bashrc updated — run 'source ~/.bashrc' to apply"
 }
 
