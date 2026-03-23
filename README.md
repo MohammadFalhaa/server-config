@@ -44,7 +44,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/yourusername/server-config/m
 
 ## What's in the configs
 
-- **tmux** — oh-my-tmux with defaults, a `.tmux.conf.local` is generated for your own overrides
+- **tmux** — oh-my-tmux
 - **neovim** — lazy.nvim, tokyonight theme, telescope, treesitter, file tree, autopairs
 - **bashrc** — aliases for git, docker, python, navigation
 
