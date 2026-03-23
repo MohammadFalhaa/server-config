@@ -5,13 +5,6 @@ echo "→ Installing PostgreSQL..."
 sudo apt update
 sudo apt install -y postgresql postgresql-contrib
 
-# postgresql-contrib includes common extensions:
-#   uuid-ossp     — generate UUIDs
-#   pgcrypto      — hashing and encryption functions
-#   hstore        — key-value pairs in a column
-#   pg_trgm       — fuzzy text search
-#   pg_stat_statements — query performance tracking
-
 echo "→ Starting PostgreSQL service..."
 sudo systemctl enable postgresql
 sudo systemctl start postgresql

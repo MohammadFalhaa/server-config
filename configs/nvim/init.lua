@@ -1,4 +1,4 @@
--- ── Bootstrap lazy.nvim (plugin manager) ────────────────────────────────────
+-- bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -9,7 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- ── Options ───────────────────────────────────────────────────────────────────
+-- options
 vim.opt.number         = true   -- line numbers
 vim.opt.relativenumber = true   -- relative line numbers
 vim.opt.tabstop        = 4
@@ -19,7 +19,7 @@ vim.opt.wrap           = false
 vim.opt.termguicolors  = true
 vim.opt.clipboard      = "unnamedplus"  -- use system clipboard
 
--- ── Keymaps ───────────────────────────────────────────────────────────────────
+-- keymaps
 vim.g.mapleader = " "
 
 local map = vim.keymap.set
@@ -31,7 +31,7 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 
--- ── Plugins ───────────────────────────────────────────────────────────────────
+-- plugins
 require("lazy").setup({
     -- Colorscheme
     {

@@ -1,23 +1,20 @@
 #!/bin/bash
 set -e
 
-# Server hardening — UFW, fail2ban, SSH config
 echo "→ Installing security tools..."
 sudo apt update
 sudo apt install -y ufw fail2ban
 
-# ── UFW Firewall ────────────────────────────────────────────────────────────────
+# ufw
 echo "→ Configuring UFW..."
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow 22    # SSH
-sudo ufw allow 80    # HTTP
-sudo ufw allow 443   # HTTPS
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
 sudo ufw --force enable
 
-# ── fail2ban ────────────────────────────────────────────────────────────────────
-# Bans IPs that repeatedly fail SSH authentication.
-# Default: ban for 10min after 5 failed attempts within 10min.
+# fail2ban
 echo "→ Configuring fail2ban..."
 sudo bash -c 'cat > /etc/fail2ban/jail.local' << 'EOF'
 [sshd]
@@ -33,9 +30,7 @@ EOF
 sudo systemctl enable fail2ban
 sudo systemctl restart fail2ban
 
-# ── SSH Hardening ───────────────────────────────────────────────────────────────
-# Disables password auth and root login — keys only.
-# Make sure your SSH key is added before running this.
+# ssh — make sure your key is added before running this
 echo "→ Hardening SSH..."
 sudo sed -i 's/^#*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
 sudo sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
