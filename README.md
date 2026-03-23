@@ -5,7 +5,7 @@ Setup scripts and dotfiles for personal servers and dev machines. Allows running
 ## Usage
 
 ```bash
-git clone ggit@github.com:MohammadFalhaa/server-config.git
+git clone git@github.com:MohammadFalhaa/server-config.git
 cd server-config
 bash setup.sh --help
 ```
@@ -13,7 +13,7 @@ bash setup.sh --help
 Or run directly from GitHub without cloning:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/yourusername/server-config/main/setup.sh) --tools --tmux
+bash <(curl -fsSL https://raw.githubusercontent.com/MohammadFalhaa/server-config/main/setup.sh) --tools --tmux
 ```
 
 ## Options
