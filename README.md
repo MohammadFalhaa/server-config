@@ -5,7 +5,7 @@ Setup scripts and dotfiles for personal servers and dev machines. Allows running
 ## Usage
 
 ```bash
-git clone git@github.com:yourusername/server-config.git
+git clone ggit@github.com:MohammadFalhaa/server-config.git
 cd server-config
 bash setup.sh --help
 ```
